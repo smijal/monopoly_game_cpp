@@ -19,7 +19,7 @@ class Player{
 	
 		//setters
 		void addMoney(int m);
-		void subMoney(int m);
+		bool subMoney(int m);
 		bool purchase(int m);
 		void addPlace(string name);
 		void setLocation(int loc);

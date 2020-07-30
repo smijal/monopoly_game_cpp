@@ -8,7 +8,7 @@ using namespace std;
 		
 		Player::Player(string name){
 			this->name = name;
-			this->money = 100000;
+			this->money = 10000;
 			this->location=0;
 		}
 		
@@ -20,8 +20,15 @@ using namespace std;
 		void Player::addMoney(int m){
 			this->money+=m;
 		}
-		void Player::subMoney(int m){
+		bool Player::subMoney(int m){
 			this->money-=m;
+			if(this->money<=0){
+				this->money=0;
+				return true;
+			}
+				
+			else
+				return false;	
 		}
 		
 		bool Player::purchase(int m){
@@ -52,7 +59,7 @@ using namespace std;
 		//getters
 		void Player::getInfo(){
 			cout<<endl;
-			cout<<"Player name: "<<this->name<<"	 Money: "<<this->money<<" 	";
+			cout<<"\n  Player name: "<<this->name<<"	 Money: $"<<this->money<<" 	";
 			print_places();
 			
 		}

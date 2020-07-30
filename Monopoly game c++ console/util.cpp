@@ -4,6 +4,8 @@
 #include "special.h"
 #include "player.h"
 #include "util.h"
+#include<algorithm>
+#include<windows.h>
 
 using namespace std;
 
@@ -102,10 +104,10 @@ void printMap(Place** map, int pos1, int pos2){
 
 void printMap(Place** map, int pos1, int pos2, int pos3){
 	printLine();
-	cout<<"\n\t\t\t\t  THE MAP"<<endl;
+	cout<<"\t\t\t\t\t\tTHE MAP"<<endl;
 	printLine();
 	for(int i=0; i<NUM_PLACES; i++){
-		cout<<map[i]->getName();
+		cout<<"\t\t\t\t\t"<<map[i]->getName();
 		if(i==pos1)
 			cout<<" *P1";
 		if(i==pos2)
@@ -118,10 +120,10 @@ void printMap(Place** map, int pos1, int pos2, int pos3){
 
 void printMap(Place** map, int pos1, int pos2, int pos3, int pos4){
 	printLine();
-	cout<<"\tTHE MAP"<<endl;
+	cout<<"\t\t\t\t\t\tTHE MAP"<<endl;
 	printLine();
 	for(int i=0; i<NUM_PLACES; i++){
-		cout<<map[i]->getName();
+		cout<<"\t\t\t\t\t"<<map[i]->getName();
 		if(i==pos1)
 			cout<<" *P1";
 		if(i==pos2)
@@ -132,10 +134,6 @@ void printMap(Place** map, int pos1, int pos2, int pos3, int pos4){
 			cout<<" *P4";
 		cout<<endl;
 	}
-}
-
-void print_map(){
-	
 }
 
 
@@ -158,5 +156,32 @@ void welcomeMessage(){
 	cout<<"\t\t\t\t\t\tMONOPOLY 2020	"<<endl;
 	cout<<"\t\t\t\t********************************************"<<endl;
 	
+}
+
+bool playerOut(int indx, int& numPlayers, Player* players[]){
+	if(--numPlayers<=1){
+		return gameOverF(players[(indx+1)%(numPlayers+1)]);
+	}
+	system("CLS");
+	printLine();
+	cout<<"\t\t\t\t\t    PLAYER OUT !!!"<<endl;
+	printLine();
+	players[indx]->getInfo();
+	cout<<endl<<"  ";
+	delete players[indx];
+	
+	return false;
+}
+
+bool gameOverF(Player* winner){
+	system("CLS");
+	printLine();
+	cout<<"\t\t\t\t\t    GAME OVER !!!"<<endl;
+	printLine();
+	cout<<"\n\t\t\t\t\t\tWinner is: ";
+	cout<<"\n\t\t\t\t\t";
+	winner->getInfo();
+	cout<<endl<<endl<<endl<<endl<<endl;
+	return true;
 }
 

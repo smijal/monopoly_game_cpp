@@ -21,7 +21,9 @@ int main(){
  	GetWindowRect(console, &ConsoleRect); 
   	MoveWindow(console, ConsoleRect.left, ConsoleRect.top, 800, 600, TRUE);
 	srand(time(NULL));
+	
 	bool gameOver=false;
+	bool pOut=false;
 	
 	welcomeMessage();
 	
@@ -60,21 +62,36 @@ int main(){
 		map[r]->getInfo();
 		
 		if(map[r]->getType()=="City"){
-			do{
-				cout<<"\n  Would you like to buy it? [Y/N] >";
-				cin>>key;
-				if(key=='Y' || key=='y'){
-					players[i]->purchase(map[r]->getCost());
-					players[i]->addPlace(map[r]->getName());
-					break;
-				}
-					
-				else if(key=='N' || key=='n'){
-					cout<<"\n  NO";
-					break;
-				}
-		
-			}while(true);	
+			if(!map[r]->isOwned()){
+					do{
+					cout<<"\n  Would you like to buy it? [Y/N] >";
+					cin>>key;
+					if(key=='Y' || key=='y'){
+						players[i]->purchase(map[r]->getCost());
+						players[i]->addPlace(map[r]->getName());
+						map[r]->setOwner(players[i]->getName());
+						map[r]->doublePrice();
+						break;
+					}
+						
+					else if(key=='N' || key=='n'){
+						cout<<"\n  NO";
+						break;
+					}
+			
+				}while(true);
+			}
+			else if (map[r]->isOwned() && map[r]->getOwner()!=players[i]->getName()){
+				cout<<"\n  Private property!";
+				cout<<"\n  You need to pay!"<<endl<<"  ";
+				system("PAUSE");
+				pOut=players[i]->subMoney(map[r]->getCost());
+				if(pOut)
+					gameOver=playerOut(i, numPlayers, players);
+					if(gameOver)
+						break;
+			}
+	
 		}
 		
 		else{
@@ -85,9 +102,7 @@ int main(){
 		
 		vector<int> locations;
 		
-		
-		
-		cout<<endl;
+		cout<<endl<<"  ";
 		system("PAUSE");
 		system("CLS");
 		cout<< '\a';
@@ -100,8 +115,6 @@ int main(){
 		
 		i=(i+1)%numPlayers;
 	}
-	
-	
 	
 	
 	return 0;

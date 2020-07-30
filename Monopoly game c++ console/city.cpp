@@ -11,3 +11,11 @@ using namespace std;
 		this->ownedBy = name;
 		owned=true;
 	}
+	
+	bool City::isOwned(){
+		return this->owned;
+	}
+	
+	string City::getOwner(){
+		return this->ownedBy;
+	}

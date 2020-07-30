@@ -29,4 +29,8 @@ void choseNumPlayers(int& numPlayers);
 
 void welcomeMessage();
 
+bool gameOverF(Player* winner);
+
+bool playerOut(int indx, int& numPlayers, Player* players[]);
+
 #endif

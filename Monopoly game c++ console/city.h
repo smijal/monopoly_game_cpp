@@ -12,6 +12,8 @@ class City : public Place{
 	public:
 		City(string name, int price);
 		void setOwner(string name);
+		bool isOwned() override;
+		string getOwner();
 };
 
 #endif

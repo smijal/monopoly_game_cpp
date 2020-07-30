@@ -25,6 +25,10 @@ class Place{
 		string getType();
 		string getName();
 		virtual Task getTask();
+		virtual bool isOwned();
+		virtual void setOwner(string name);
+		virtual string getOwner();
+		void doublePrice();
 };
 
 

@@ -31,7 +31,18 @@
 		Task Place::getTask(){
 			return Start;
 		}
-		
 		int Place::getCost(){
 			return this->price;
+		}
+		bool Place::isOwned(){
+			return false;
+		}
+		void Place::setOwner(string name){
+			cout<<"\n  Owner cannot be set";
+		}
+		string Place::getOwner(){
+			cout<<"\n  Owner can't get owner be";
+		}
+		void Place::doublePrice(){
+			this->price*=2;
 		}
