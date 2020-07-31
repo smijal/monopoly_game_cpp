@@ -8,7 +8,7 @@ using namespace std;
 		
 		Player::Player(string name){
 			this->name = name;
-			this->money = 10000;
+			this->money = 200000;
 			this->location=0;
 		}
 		

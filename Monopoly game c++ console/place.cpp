@@ -53,6 +53,10 @@
 			this->price*=2;
 		}
 		
+		void Place::normalPrice(){
+			this->price/=2;
+		}
+		
 		int Place::getIndex_byName(string name){
 			if(this->name==name)
 				return this->index;

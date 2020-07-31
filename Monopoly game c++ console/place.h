@@ -31,6 +31,7 @@ class Place{
 		virtual void removeOwner();
 		virtual string getOwner();
 		void doublePrice();
+		void normalPrice();
 		int getIndex_byName(string name);
 };
 

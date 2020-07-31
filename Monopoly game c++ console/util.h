@@ -9,7 +9,7 @@ using namespace std;
 
 void move(int x, int& curPos);
 
-void specialExecution(Task task, int& curPos);
+bool specialExecution(Task task, int& curPos, Player*& p, bool& pOut);
 
 void createMap(Place* map[]);
 

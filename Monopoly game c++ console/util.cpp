@@ -17,17 +17,19 @@ void move(int x, int& curPos){
 	curPos%=NUM_PLACES;
 }
 
-void specialExecution(Task task, int& curPos){
+bool specialExecution(Task task, int& curPos, Player*& p, bool& pOut){
+	char inp;
 	switch(task){
 		case Forward_3_places: move(3,curPos); cout<<"\n  You moved forward 3 places..."; break;
 		case Forward_5_places: move(5, curPos);cout<<"\n  You moved forward 5 places..."; break;
 		case Back_3_places: move(-3,curPos);cout<<"\n  You moved back 3 places..."; break;
 		case Back_5_places: move(-5,curPos);cout<<"\n  You moved back 5 places..."; break;
-		case Jail: curPos=7; cout<<"\n  You are in Jail"; break;
-		case Your_turn: cout<<"\n  It is your turn again!"; break;
-		default:
-			cout<<"\n Nothing"<<endl;
+		case Jail: curPos=7; cout<<"\n  You are in Jail"; cout<<"\n  Pay $10 000 to escape! [P]>"; 
+					cin>>inp; if(inp=='P' || inp=='p') pOut=p->subMoney(10000); break; 
+		case Your_turn: cout<<"\n  It is your turn again!";  return true; break;
 	}
+	
+	return false;
 }
 
 void createMap(Place** map){
@@ -174,6 +176,7 @@ bool playerOut(int indx, int& numPlayers, Player* players[], Place* map[]){
 	
 	for(int& x : ownedPlaces){
 		map[x]->removeOwner();
+		map[x]->normalPrice();
 	}
 	
 	delete players[indx];
@@ -186,7 +189,7 @@ bool gameOverF(Player* winner){
 	printLine();
 	cout<<"\t\t\t\t\t    GAME OVER !!!"<<endl;
 	printLine();
-	cout<<"\n\t\t\t\t\t\tWinner is: ";
+	cout<<"\n\t\t\t\t\t    Winner is: ";
 	cout<<"\n\t\t\t\t\t";
 	winner->getInfo();
 	cout<<endl<<endl<<endl<<endl<<endl;
