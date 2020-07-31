@@ -3,17 +3,18 @@
 		
 		using namespace std;
 		
-		Place::Place(string name, int price, string type){
+		Place::Place(string name, int price, string type, int index){
 			this->name=name;
 			this->price=price;
 			this->type = type;
+			this->index=index;
 		}
 
 		Place::Place(){
 		}
 		
 		Place::~Place(){
-			//cout<<"Place Destructor called"<<endl;
+			cout<<"Place Destructor called"<<endl;
 		}
 		void Place::getInfo(){
 			cout<<endl;
@@ -40,9 +41,21 @@
 		void Place::setOwner(string name){
 			cout<<"\n  Owner cannot be set";
 		}
+		
+		void Place::removeOwner(){
+			cout<<"\n  Cannot be removed";
+		}
+		
 		string Place::getOwner(){
 			cout<<"\n  Owner can't get owner be";
 		}
 		void Place::doublePrice(){
 			this->price*=2;
+		}
+		
+		int Place::getIndex_byName(string name){
+			if(this->name==name)
+				return this->index;
+			else
+				return -1;
 		}

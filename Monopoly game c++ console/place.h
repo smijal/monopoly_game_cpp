@@ -12,8 +12,9 @@ class Place{
 		string name;
 		string type;
 		int price;
+		int index;
 		
-		Place(string name, int price, string type);
+		Place(string name, int price, string type, int index);
 
 	public:
 		Place();
@@ -27,8 +28,10 @@ class Place{
 		virtual Task getTask();
 		virtual bool isOwned();
 		virtual void setOwner(string name);
+		virtual void removeOwner();
 		virtual string getOwner();
 		void doublePrice();
+		int getIndex_byName(string name);
 };
 
 

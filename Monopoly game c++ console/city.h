@@ -10,8 +10,9 @@ class City : public Place{
 		string ownedBy;
 		bool owned;
 	public:
-		City(string name, int price);
-		void setOwner(string name);
+		City(string name, int price, int index);
+		void setOwner(string name) override;
+		void removeOwner() override;
 		bool isOwned() override;
 		string getOwner();
 };

@@ -6,6 +6,7 @@
 #include "util.h"
 #include<algorithm>
 #include<windows.h>
+#include<vector>
 
 using namespace std;
 
@@ -30,26 +31,26 @@ void specialExecution(Task task, int& curPos){
 }
 
 void createMap(Place** map){
-	map[0]= new Special("Start", Start);
-	map[1]= new City("Chicago", 10000);
-	map[2]= new City("Berlin", 9000);
-	map[3]= new Special("Move forward 3 places",Forward_3_places);
-	map[4]= new City("Moskow", 11000);
-	map[5]= new City("Las Vegas", 12000);
-	map[6]= new City("London", 10000);
-	map[7]= new Special("Jail", Jail);
-	map[8]= new Special("Move back 3 places", Back_3_places);
-	map[9]= new City("Monaco", 30000);
-	map[10]=new City("Ohrid", 7000);
-	map[11]=new City("Tokyo", 13000);
-	map[12]=new City("New York", 19000);
-	map[13]=new City("Texas", 11000);
-	map[14]=new Special("Move forward 5 places",Forward_5_places);
-	map[15]=new Special("Move back 5 places", Back_5_places);
-	map[16]=new City("Sidney", 15000);
-	map[17]=new City("Mexico City", 16000);
-	map[18]=new Special("You won another turn", Your_turn);
-	map[19]=new City("Amsterdam", 15000);
+	map[0]= new Special("Start", Start, 0);
+	map[1]= new City("Chicago", 10000, 1);
+	map[2]= new City("Berlin", 9000, 2);
+	map[3]= new Special("Move forward 3 places",Forward_3_places, 3);
+	map[4]= new City("Moskow", 11000, 4);
+	map[5]= new City("Las Vegas", 12000, 5);
+	map[6]= new City("London", 10000, 6);
+	map[7]= new Special("Jail", Jail, 7);
+	map[8]= new Special("Move back 3 places", Back_3_places, 8);
+	map[9]= new City("Monaco", 30000, 9);
+	map[10]=new City("Ohrid", 7000, 10);
+	map[11]=new City("Tokyo", 13000, 11);
+	map[12]=new City("New York", 19000, 12);
+	map[13]=new City("Texas", 11000, 13);
+	map[14]=new Special("Move forward 5 places",Forward_5_places, 14);
+	map[15]=new Special("Move back 5 places", Back_5_places, 15);
+	map[16]=new City("Sidney", 15000, 16);
+	map[17]=new City("Mexico City", 16000, 17);
+	map[18]=new Special("You won another turn", Your_turn, 18);
+	map[19]=new City("Amsterdam", 15000, 19);
 }
 
 vector<int> createPlayers(Player** players, int numPlayers){
@@ -158,7 +159,7 @@ void welcomeMessage(){
 	
 }
 
-bool playerOut(int indx, int& numPlayers, Player* players[]){
+bool playerOut(int indx, int& numPlayers, Player* players[], Place* map[]){
 	if(--numPlayers<=1){
 		return gameOverF(players[(indx+1)%(numPlayers+1)]);
 	}
@@ -168,6 +169,13 @@ bool playerOut(int indx, int& numPlayers, Player* players[]){
 	printLine();
 	players[indx]->getInfo();
 	cout<<endl<<"  ";
+	
+	vector<int> ownedPlaces = players[indx]->getPlaces();
+	
+	for(int& x : ownedPlaces){
+		map[x]->removeOwner();
+	}
+	
 	delete players[indx];
 	
 	return false;
@@ -185,3 +193,12 @@ bool gameOverF(Player* winner){
 	return true;
 }
 
+void destroyPlayers(Player* players[], int numPlayers){
+	for(int i=0; i<numPlayers; i++)
+		delete players[i];
+}
+
+void destroyMap(Place* map[]){
+	for(int i=0; i<NUM_PLACES; i++)
+		delete map[i];
+}

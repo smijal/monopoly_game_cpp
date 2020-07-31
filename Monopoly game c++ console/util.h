@@ -11,9 +11,13 @@ void move(int x, int& curPos);
 
 void specialExecution(Task task, int& curPos);
 
-void createMap(Place** map);
+void createMap(Place* map[]);
 
-vector<int> createPlayers(Player** players, int numPlayers);
+void destroyMap(Place* map[]);
+
+vector<int> createPlayers(Player* players[], int numPlayers);
+
+void destroyPlayers(Player* players[], int numPlayers);
 
 void printMap(Place** map, int pos1, int pos2);
 
@@ -31,6 +35,7 @@ void welcomeMessage();
 
 bool gameOverF(Player* winner);
 
-bool playerOut(int indx, int& numPlayers, Player* players[]);
+bool playerOut(int indx, int& numPlayers, Player* players[], Place* map[]);
+
 
 #endif

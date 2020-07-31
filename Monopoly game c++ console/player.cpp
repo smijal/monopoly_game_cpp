@@ -13,7 +13,7 @@ using namespace std;
 		}
 		
 		Player::~Player(){
-			//cout<<"Player destructor called"<<endl;
+			cout<<"Player destructor called"<<endl;
 		}
 		
 		//setters
@@ -48,8 +48,9 @@ using namespace std;
 			return true;
 		}
 		
-		void Player::addPlace(string name){
+		void Player::addPlace(string name, int indx){
 			this->owned_places.insert(name);
+			this->owned_places_indexes.push_back(indx);
 		}
 		
 		void Player::setLocation(int loc){
@@ -84,4 +85,9 @@ using namespace std;
 		int Player::getMoney(){
 			return this->money;
 		}
+		
+		vector<int> Player::getPlaces(){
+			return this->owned_places_indexes;
+		}
+		
 

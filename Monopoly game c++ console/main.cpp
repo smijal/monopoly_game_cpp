@@ -67,8 +67,9 @@ int main(){
 					cout<<"\n  Would you like to buy it? [Y/N] >";
 					cin>>key;
 					if(key=='Y' || key=='y'){
-						players[i]->purchase(map[r]->getCost());
-						players[i]->addPlace(map[r]->getName());
+						if(!players[i]->purchase(map[r]->getCost()))
+							break;
+						players[i]->addPlace(map[r]->getName(), r);
 						map[r]->setOwner(players[i]->getName());
 						map[r]->doublePrice();
 						break;
@@ -87,7 +88,7 @@ int main(){
 				system("PAUSE");
 				pOut=players[i]->subMoney(map[r]->getCost());
 				if(pOut)
-					gameOver=playerOut(i, numPlayers, players);
+					gameOver=playerOut(i, numPlayers, players, map);
 					if(gameOver)
 						break;
 			}
@@ -104,8 +105,9 @@ int main(){
 		
 		cout<<endl<<"  ";
 		system("PAUSE");
-		system("CLS");
+		//system("CLS");
 		cout<< '\a';
+		
 		
 		for(int i=0; i<numPlayers; i++){
 			locations.push_back(players[i]->getLocation());
@@ -116,7 +118,8 @@ int main(){
 		i=(i+1)%numPlayers;
 	}
 	
-	
 	system("PAUSE");
+	destroyPlayers(players, numPlayers);
+	destroyMap(map);
 	return 0;
 }

@@ -10,7 +10,7 @@ class Special : public Place{
 		Task task;
 		
 	public:
-		Special(string name, Task task);
+		Special(string name, Task task, int index);
 		Task getTask() override;
 };
 

@@ -3,7 +3,7 @@
 
 using namespace std;
 
-	Special::Special(string name, Task task) : Place(name, 0, "Special"){
+	Special::Special(string name, Task task, int index) : Place(name, 0, "Special", index){
 		this->task=task;
 	}
 	

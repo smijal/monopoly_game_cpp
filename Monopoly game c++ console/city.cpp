@@ -3,13 +3,18 @@
 
 using namespace std;
 
-	City::City(string name, int price) : Place(name, price, "City"){
+	City::City(string name, int price, int index) : Place(name, price, "City", index){
 		this->owned = false;
 	}
 	
 	void City::setOwner(string name){
 		this->ownedBy = name;
-		owned=true;
+		this->owned=true;
+	}
+	
+	void City::removeOwner(){
+		this->ownedBy="None";
+		this->owned=false;
 	}
 	
 	bool City::isOwned(){
