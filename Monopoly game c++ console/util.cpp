@@ -6,7 +6,6 @@
 #include "util.h"
 #include<algorithm>
 #include<windows.h>
-#include<vector>
 
 using namespace std;
 
@@ -55,13 +54,14 @@ void createMap(Place** map){
 	map[19]=new City("Amsterdam", 15000, 19);
 }
 
-vector<int> createPlayers(Player** players, int numPlayers){
+vector<int> createPlayers(Player** players, int numPlayers, map<string,int>& name_index){
 	vector<int> locations(numPlayers);
 	for(int i=0; i<numPlayers; i++){
 		cout<<"  Player "<<i+1<<" name > ";
 		string name;
 		cin>>name;
 		players[i] = new Player(name);
+		name_index[name]=i;
 	}
 	return locations;
 }

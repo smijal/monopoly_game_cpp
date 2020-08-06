@@ -17,21 +17,25 @@ class Place{
 		Place(string name, int price, string type, int index);
 
 	public:
+		//constructors/destuctors
 		Place();
 		~Place();
-
+		
+		//setters
+		void changePrice(int newPrice);
+		virtual void setOwner(string name);
+		virtual void removeOwner();		
+		void doublePrice();
+		void normalPrice();
+		
+		//getters		
 		void getInfo();
 		int getCost();
-		void changePrice(int newPrice);
 		string getType();
 		string getName();
 		virtual Task getTask();
 		virtual bool isOwned();
-		virtual void setOwner(string name);
-		virtual void removeOwner();
 		virtual string getOwner();
-		void doublePrice();
-		void normalPrice();
 		int getIndex_byName(string name);
 };
 

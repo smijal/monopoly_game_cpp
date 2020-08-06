@@ -9,6 +9,7 @@
 #include <time.h>
 #include "util.h"
 #include<windows.h>
+#include <map>
 
 using namespace std;
 
@@ -33,11 +34,12 @@ int main(){
 		welcomeMessage();
 		
 		int numPlayers;
+		map<string,int> name_index;
 		int i=0;
 		
 		choseNumPlayers(numPlayers);
 		Player* players[numPlayers];
-		vector<int> locations = createPlayers(players, numPlayers);
+		vector<int> locations = createPlayers(players, numPlayers, name_index);
 		
 		system("CLS");
 		
@@ -91,6 +93,7 @@ int main(){
 					cout<<"\n  Private property!";
 					cout<<"\n  You need to pay!"<<endl<<"  ";
 					pOut=players[i]->subMoney(map[r]->getCost());
+					players[name_index[map[r]->getOwner()]]->addMoney(map[r]->getCost());
 				}
 		
 			}
